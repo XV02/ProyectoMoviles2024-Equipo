@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import './Favs/favorites.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
-        //
+        //  
         // TRY THIS: Try running your application with "flutter run". You'll see
         // the application has a purple toolbar. Then, without quitting the app,
         // try changing the seedColor in the colorScheme below to Colors.green
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Container(child: const Favorites(),),
     );
   }
 }
