@@ -92,7 +92,7 @@ class DetailsPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Color.fromARGB(255, 243, 52, 38),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -174,7 +174,7 @@ class DetailsPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Color.fromARGB(255, 243, 52, 38),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

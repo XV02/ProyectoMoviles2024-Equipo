@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/details_page.dart';
+import 'package:proyecto_final/shopping_cart.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,9 +17,9 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Material App Bar'),
+          title: Text(''),
         ),
-        body: Center(),
+        body: DetailsPage(),
       ),
     );
   }
