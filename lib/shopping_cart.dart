@@ -45,7 +45,7 @@ class ShoppingCart extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Color.fromARGB(255, 243, 52, 38),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -131,7 +131,7 @@ class ShoppingCart extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Color.fromARGB(255, 243, 52, 38),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -229,6 +229,9 @@ class ShoppingCart extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: null,
                     style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Color.fromARGB(255, 184, 23, 11),
+                      ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -239,7 +242,7 @@ class ShoppingCart extends StatelessWidget {
                       "Total: \$300",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 32,
+                        fontSize: 28,
                       ),
                     ),
                   ),
@@ -250,17 +253,21 @@ class ShoppingCart extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: null,
                     style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.amber)),
+                      ),
+                      backgroundColor: MaterialStateProperty.all(Colors.amber),
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.camera_alt_outlined),
+                        Icon(
+                          Icons.paypal,
+                          color: Colors.white,
+                          size: 32,
+                        ),
                         Text(
                           "PayPal",
                           style: TextStyle(
