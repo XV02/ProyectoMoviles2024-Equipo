@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text(''),
         ),
-        body: DetailsPage(),
+        body: ShoppingCart(),
       ),
     );
   }
