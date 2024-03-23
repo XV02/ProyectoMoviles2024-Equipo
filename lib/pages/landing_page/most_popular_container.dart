@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
@@ -75,45 +74,84 @@ List<Widget> generateCards(List<Tuple2<String, String>> mangas) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            alignment: Alignment.center,
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Icon(
-              Icons.camera_alt_outlined,
-              size: 70,
-              color: Colors.red,
-            )),
-        Text(
-          category.item1,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-        ),
-        Row(
-          children: [
-            const Icon(
-              Icons.star,
-              color: Colors.yellow,
-              size: 18,
-            ),
-            const SizedBox(width: 5),
-            Text(
-              category.item2,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
+        const MostPopularImage(),
+        MostPopularTitle(title: category.item1),
+        MostPopularGrade(grade: category.item2),
       ],
     );
   }).toList();
+}
+
+class MostPopularImage extends StatelessWidget {
+  const MostPopularImage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        alignment: Alignment.center,
+        width: 150,
+        height: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Icon(
+          Icons.camera_alt_outlined,
+          size: 70,
+          color: Colors.red,
+        ));
+  }
+}
+
+class MostPopularTitle extends StatelessWidget {
+  final String title;
+
+  const MostPopularTitle({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+      ),
+    );
+  }
+}
+
+class MostPopularGrade extends StatelessWidget {
+  final String grade;
+
+  const MostPopularGrade({
+    super.key,
+    required this.grade,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(
+          Icons.star,
+          color: Colors.yellow,
+          size: 18,
+        ),
+        const SizedBox(width: 5),
+        Text(
+          grade,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+          ),
+        ),
+      ],
+    );
+  }
 }

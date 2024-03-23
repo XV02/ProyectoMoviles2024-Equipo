@@ -11,7 +11,6 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
         IconButton(
-          //The icon should be three dots
           icon: const Icon(Icons.more_vert),
           onPressed: () {},
         ),
