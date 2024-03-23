@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/details_page.dart';
-import 'package:proyecto_final/shopping_cart.dart';
 
 void main() => runApp(const MyApp());
 
