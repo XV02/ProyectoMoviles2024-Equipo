@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/pages/shopping_cart/shopping_cart_page.dart';
+import 'package:proyecto_final/pages/landing_page/landing_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       initialRoute: '/',
       routes: Map<String, WidgetBuilder>.from({
-        '/': (context) => const ShoppingCartPage(),
+        '/': (context) => const LandingPage(),
       }),
       theme: ThemeData(
         useMaterial3: false,
