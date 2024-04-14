@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:proyecto_final/pages/landing_page/landing_page.dart';
 
 void main() => runApp(const MyApp());
