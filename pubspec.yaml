@@ -39,6 +39,9 @@ dependencies:
   equatable: ^2.0.5
   http: ^1.2.1
   tuple: ^2.0.2
+  firebase_core: ^2.29.0
+  firebase_auth: ^4.19.1
+  cloud_firestore: ^4.16.1
 
 dev_dependencies:
   flutter_test:
