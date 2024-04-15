@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto_final/auth/bloc/bloc/auth_bloc.dart';
 import 'package:proyecto_final/pages/landing_page/landing_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:proyecto_final/firebase_options.dart';
+import 'package:proyecto_final/pages/login_page/login_page.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (context) => AuthBloc()..add(VerifyAuthEvent())),
+  ], child: const MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +25,20 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       initialRoute: '/',
       routes: Map<String, WidgetBuilder>.from({
-        '/': (context) => const LandingPage(),
+        '/': (context) => BlocConsumer(builder: (context, state) {
+              if (state is AuthSuccessState) {
+                return const LandingPage();
+              } else if (state is UnAuthState ||
+                  state is AuthErrorState ||
+                  state is SignOutSuccessState) {
+                return const LoginPage();
+              }
+              return const Center(child: CircularProgressIndicator());
+            }, listener: (context, state) {
+              if (state is AuthErrorState) {
+                print("Error al autenticar");
+              }
+            }),
       }),
       theme: ThemeData(
         useMaterial3: false,
