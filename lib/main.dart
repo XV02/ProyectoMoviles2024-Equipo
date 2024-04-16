@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       initialRoute: '/',
       routes: Map<String, WidgetBuilder>.from({
-        '/': (context) => BlocConsumer(builder: (context, state) {
+        '/': (context) =>
+            BlocConsumer<AuthBloc, AuthState>(builder: (context, state) {
               if (state is AuthSuccessState) {
                 return const LandingPage();
               } else if (state is UnAuthState ||
@@ -36,7 +37,12 @@ class MyApp extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }, listener: (context, state) {
               if (state is AuthErrorState) {
-                print("Error al autenticar");
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("There was an error"),
+                    backgroundColor: Colors.red,
+                  ),
+                );
               }
             }),
       }),
