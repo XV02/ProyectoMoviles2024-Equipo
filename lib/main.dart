@@ -5,6 +5,7 @@ import 'package:proyecto_final/pages/landing_page/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:proyecto_final/firebase_options.dart';
 import 'package:proyecto_final/pages/login_page/login_page.dart';
+import 'package:proyecto_final/shared/widgets/loading_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,13 +35,16 @@ class MyApp extends StatelessWidget {
                   state is SignOutSuccessState) {
                 return const LoginPage();
               }
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingPage();
             }, listener: (context, state) {
               if (state is AuthErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("There was an error"),
-                    backgroundColor: Colors.red,
+                  SnackBar(
+                    content: Text(
+                      "There was an error",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.black,
                   ),
                 );
               }

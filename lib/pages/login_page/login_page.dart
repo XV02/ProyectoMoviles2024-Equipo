@@ -15,38 +15,52 @@ class LoginPage extends StatelessWidget {
         backgroundColor: Colors.red,
         body: // Login button from google
             Center(
-                child: ElevatedButton(
-          // The style of the button should be a dark red-brown color with the google logo on the beginning that is in assets/images/google_logo.png
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red[800],
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            fixedSize: const Size(270, 80),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+                child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Put here the app logo
+            const SizedBox(
+              height: 200,
+              width: 200,
+              child: Image(
+                image: AssetImage('assets/images/app_logo.png'),
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          onPressed: () {
-            BlocProvider.of<AuthBloc>(context).add(GoogleAuthEvent());
-          },
-          // The style of the button should be a dark red-brown color with the google logo on the beginning that is in assets/images/google_logo.png
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Sign in/up with',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w400),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red[800],
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                fixedSize: const Size(270, 80),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-              Image(
-                image: AssetImage('assets/images/google_logo.png'),
-                width: 60,
-                height: 80,
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context).add(GoogleAuthEvent());
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Sign in/up with',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Image(
+                    image: AssetImage('assets/images/google_logo.png'),
+                    width: 60,
+                    height: 80,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 100),
+          ],
         )));
   }
 }
