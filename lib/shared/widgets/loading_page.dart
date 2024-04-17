@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/shared/widgets/logo_image.dart';
 import 'package:proyecto_final/shared/widgets/red_nav.dart';
 
 class LoadingPage extends StatelessWidget {
@@ -18,14 +19,7 @@ class LoadingPage extends StatelessWidget {
             SizedBox(
               height: 150,
             ),
-            SizedBox(
-              height: 200,
-              width: 200,
-              child: Image(
-                image: AssetImage('assets/images/app_logo.png'),
-                fit: BoxFit.contain,
-              ),
-            ),
+            LogoImage(),
             CircularProgressIndicator(
               color: Colors.white,
             ),
