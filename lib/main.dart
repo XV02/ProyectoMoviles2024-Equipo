@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyecto_final/auth/bloc/bloc/auth_bloc.dart';
+import 'package:proyecto_final/pages/details_page/details_page.dart';
+import 'package:proyecto_final/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:proyecto_final/pages/landing_page/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:proyecto_final/firebase_options.dart';
