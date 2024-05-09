@@ -8,3 +8,9 @@ sealed class ShoppingCartState extends Equatable {
 }
 
 final class ShoppingCartInitial extends ShoppingCartState {}
+
+class ShoppingCartLoaded extends ShoppingCartState {}
+
+class ProductAdded extends ShoppingCartState {}
+
+class ProductRemoved extends ShoppingCartState {}
