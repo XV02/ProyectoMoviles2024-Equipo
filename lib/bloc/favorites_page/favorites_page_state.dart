@@ -14,3 +14,5 @@ class FavoritesLoaded extends FavoritesPageState {}
 class FavoriteAdded extends FavoritesPageState {}
 
 class FavoriteRemoved extends FavoritesPageState {}
+
+class FavoritesError extends FavoritesPageState {}
