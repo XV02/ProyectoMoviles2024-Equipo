@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:proyecto_final/firebase_options.dart';
 import 'package:proyecto_final/pages/login_page/login_page.dart';
 import 'package:proyecto_final/shared/widgets/loading_page.dart';
+import 'package:proyecto_final/pages/favorites_page/favorites_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,33 +29,60 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       initialRoute: '/',
       routes: Map<String, WidgetBuilder>.from({
-        '/': (context) =>
-            BlocConsumer<AuthBloc, AuthState>(builder: (context, state) {
-              if (state is AuthSuccessState) {
-                return const LandingPage();
-              } else if (state is UnAuthState ||
-                  state is AuthErrorState ||
-                  state is SignOutSuccessState) {
-                return const LoginPage();
-              }
-              return const LoadingPage();
-            }, listener: (context, state) {
-              if (state is AuthErrorState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      "There was an error",
-                      style: TextStyle(color: Colors.white),
+        '/': (context) => BlocConsumer<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccessState) {
+                  return const LandingPage();
+                } else if (state is UnAuthState ||
+                    state is AuthErrorState ||
+                    state is SignOutSuccessState) {
+                  return const LoginPage();
+                }
+                return const LoadingPage();
+              },
+              listener: (context, state) {
+                if (state is AuthErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "There was an error",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.black,
                     ),
-                    backgroundColor: Colors.black,
-                  ),
-                );
-              }
-            }),
+                  );
+                }
+              },
+            ),
         '/shopping-cart': (context) => BlocConsumer<AuthBloc, AuthState>(
               builder: (context, state) {
                 if (state is AuthSuccessState) {
                   return const ShoppingCartPage();
+                } else if (state is UnAuthState ||
+                    state is AuthErrorState ||
+                    state is SignOutSuccessState) {
+                  return const LoginPage();
+                }
+                return const LoadingPage();
+              },
+              listener: (context, state) {
+                if (state is AuthErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "There was an error",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.black,
+                    ),
+                  );
+                }
+              },
+            ),
+        '/favorites-page': (context) => BlocConsumer<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccessState) {
+                  return const FavoritesPage();
                 } else if (state is UnAuthState ||
                     state is AuthErrorState ||
                     state is SignOutSuccessState) {
