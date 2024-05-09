@@ -11,7 +11,11 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
+        IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/shopping-cart');
+            },
+            icon: const Icon(Icons.shopping_cart)),
         PopupMenuButton(itemBuilder: (BuildContext context) {
           return _buildPopupMenuItems(context);
         })

@@ -51,6 +51,31 @@ class MyApp extends StatelessWidget {
                 );
               }
             }),
+        '/shopping-cart': (context) => BlocConsumer<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccessState) {
+                  return const ShoppingCartPage();
+                } else if (state is UnAuthState ||
+                    state is AuthErrorState ||
+                    state is SignOutSuccessState) {
+                  return const LoginPage();
+                }
+                return const LoadingPage();
+              },
+              listener: (context, state) {
+                if (state is AuthErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "There was an error",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.black,
+                    ),
+                  );
+                }
+              },
+            ),
       }),
       theme: ThemeData(
         useMaterial3: false,

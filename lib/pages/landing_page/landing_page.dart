@@ -12,6 +12,7 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const LandingAppBar(),
       body: Container(
         color: Colors.red,
