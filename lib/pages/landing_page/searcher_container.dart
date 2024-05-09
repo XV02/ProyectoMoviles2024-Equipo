@@ -9,7 +9,7 @@ class SearcherContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 180,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -46,7 +46,7 @@ class SearcherContainer extends StatelessWidget {
               alignment: Alignment.center,
               child: Padding(
                 padding: // PAdding of 20 in top and bottom
-                    const EdgeInsets.symmetric(vertical: 20),
+                    const EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
