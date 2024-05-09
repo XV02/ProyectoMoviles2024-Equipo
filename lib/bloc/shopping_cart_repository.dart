@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CartRepository {
+class ShoppingCartRepository {
   final CollectionReference shoppingCartCollection =
       FirebaseFirestore.instance.collection('shopping_cart');
 
@@ -9,9 +9,11 @@ class CartRepository {
     final docSnapshot = await shoppingCartCollection.doc(user.uid).get();
     // Verificion que no exista ningun documento con el userid
     if (!docSnapshot.exists) {
-      await shoppingCartCollection.doc(user.uid).set({
-        'items': [],
-      });
+      await shoppingCartCollection.doc(user.uid).set(
+        {
+          'items': [],
+        },
+      );
     }
   }
 
@@ -27,5 +29,7 @@ class CartRepository {
     });
   }
 
-  // Falta agregar funcion para obtener la lista de favoritos completa
+  Future<void> getFavorites(String userId, String productId) async {
+    await shoppingCartCollection.doc(userId).get();
+  }
 }

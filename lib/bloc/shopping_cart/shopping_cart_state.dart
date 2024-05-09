@@ -14,3 +14,5 @@ class ShoppingCartLoaded extends ShoppingCartState {}
 class ProductAdded extends ShoppingCartState {}
 
 class ProductRemoved extends ShoppingCartState {}
+
+class ShoppingCartError extends ShoppingCartState {}
