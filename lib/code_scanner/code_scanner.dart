@@ -1,106 +1,78 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-
-
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:proyecto_final/data_models/manga_data.dart';
+import 'package:proyecto_final/code_scanner/code_scanner_appbar.dart';
 import 'package:proyecto_final/pages/individual_item/manga.dart';
 
-class code_scanner extends StatelessWidget {
-  const code_scanner({super.key});
+class CodeScanner extends StatelessWidget {
+  const CodeScanner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: Column(
-        
-      
-        crossAxisAlignment: CrossAxisAlignment.center,
-        
-        
-        children: [
-        Container( 
-          margin: EdgeInsets.only(bottom:40.0),
-          width: 500, 
-          height:140,
-          decoration:  BoxDecoration(
-            border: Border.all(color: Colors.red),
-            color: Colors.white, 
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10)
-            )
-            
-          ),
-          child: const Center(child: Text('Code Scanner',style: TextStyle(
-          decoration: TextDecoration.underline,decorationStyle: TextDecorationStyle.dashed, decorationColor: Colors.white),),)
-          
-          
-          
-          ),
+    return Scaffold(
+      appBar: CodeScannerAppBar(),
+      body: Container(
+        color: Colors.red,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+                margin: EdgeInsets.only(bottom: 40.0),
+                width: 500,
+                height: 140,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.red),
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: Center(
+                  child: Text(
+                    'Scan the QR code',
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.dashed,
+                        decorationColor: Colors.white),
+                  ),
+                )),
 
-          Center(
-            
-             child: Container( 
+            Center(
+                child: Container(
               height: 200,
               width: 200,
+              margin: const EdgeInsets.only(top: 100),
+              child: const Icon(Icons.qr_code_2_outlined, size: 200),
+              color: Colors.white,
+            )),
 
-              margin: const EdgeInsets.only(top:100),
-              
-              child: const Icon(Icons.qr_code_2_outlined, size:200),color: Colors.white, )
-          ),
-          
-          
-        //   Center(
-            
-        //      child: Container( 
+            //   Center(
 
-        //       margin: const EdgeInsets.only(top:100),
-        //       width: 100,
-        //       height: 100,
-              
-        //       child: const Text('Open your camera ',  style: TextStyle(fontSize: 25, color:Color.fromARGB(186, 255, 255, 255),
-        //     decoration: TextDecoration.underline,decorationStyle: TextDecorationStyle.dashed, decorationColor: Colors.red)
-        //   )
+            //      child: Container(
 
-        //   )),
-          Container(child:QR(),width: 1000, height: 250, )
+            //       margin: const EdgeInsets.only(top:100),
+            //       width: 100,
+            //       height: 100,
 
+            //       child: const Text('Open your camera ',  style: TextStyle(fontSize: 25, color:Color.fromARGB(186, 255, 255, 255),
+            //     decoration: TextDecoration.underline,decorationStyle: TextDecorationStyle.dashed, decorationColor: Colors.red)
+            //   )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
-
-      ],),
+            //   )),
+            Container(
+              child: QR(),
+              width: 1000,
+              height: 250,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
 
-
 class QR extends StatefulWidget {
   @override
-  _QRState createState() =>_QRState();
+  _QRState createState() => _QRState();
 }
 
 class _QRState extends State<QR> {
@@ -151,7 +123,7 @@ class _QRState extends State<QR> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() async{
+    setState(() async {
       _scanBarcode = barcodeScanRes;
       // MangaModel toAdd  = MangaModel();
       // print("Debug Stuff $barcodeScanRes");
@@ -162,37 +134,30 @@ class _QRState extends State<QR> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-          
-            body: Builder(builder: (BuildContext context) {
-              return Container(
-                // margin: EdgeInsets.all(10),
-                width: 400,
-                height: 800,
-                color: Colors.red,
-                  alignment: Alignment.center,
-                  child: Flex(
-                      direction: Axis.vertical,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        
-                        ElevatedButton(
-                            onPressed: ()async{
+    return Container(
+        // margin: EdgeInsets.all(10),
+        width: 400,
+        height: 800,
+        color: Colors.red,
+        alignment: Alignment.center,
+        child: Flex(
+            direction: Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: () async {
+                    // MangaModel toAdd  = MangaModel();
 
-
-                              // MangaModel toAdd  = MangaModel();
-                              
-                              await scanQR();
-                              // MangaModel curr = await toAdd.getDataById(_scanBarcode);
-                              print(_scanBarcode);
-                              Navigator.push(context,  MaterialPageRoute(builder: (context) => manga_item(id: _scanBarcode)));
-                            } ,
-                            child: Text('Start QR scan')),
-                       
-                        Text('Scan result : $_scanBarcode\n',
-                            style: TextStyle(fontSize: 20))
-                      ]));
-            })));
+                    await scanQR();
+                    // MangaModel curr = await toAdd.getDataById(_scanBarcode);
+                    print(_scanBarcode);
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushNamedAndRemoveUntil(context, "/MangaItem",
+                          (Route<dynamic> route) => false,
+                          arguments: MangaItemArguments(_scanBarcode));
+                    });
+                  },
+                  child: Text('Start QR scan')),
+            ]));
   }
 }
