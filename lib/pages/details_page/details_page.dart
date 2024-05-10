@@ -56,7 +56,7 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            DetailsHeader(),
+            DetailsHeader(name: data[0].getTitle()),
             DetailsList(data: data, id: id),
             DetailsFooter(),
           ],
