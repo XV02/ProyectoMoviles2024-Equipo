@@ -8,7 +8,12 @@ class favs extends StatelessWidget {
   Widget build(BuildContext context) {
     
     List<String> favs_list;
-    return Container();
+    return Container(
+
+
+
+      
+    );
   }
 
   fetchfavs(){

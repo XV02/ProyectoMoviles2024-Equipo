@@ -39,15 +39,20 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
         value: 0,
         child: Text('Profile'),
       ),
-      const PopupMenuItem(
-        value: 1,
-        child: Text('Favorites'),
-      ),
+ 
       PopupMenuItem(
-        value: 2,
+        value: 1,
         child: const Text('Log out'),
         onTap: () {
           BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
+        },
+      ),
+      PopupMenuItem(
+        value: 2,
+        child: const Text('QR Scanner' ),
+        onTap: () {
+          Navigator.pushNamed(context, '/QR-Scanner');
+
         },
       ),
     ];

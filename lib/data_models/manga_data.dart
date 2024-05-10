@@ -81,7 +81,7 @@ class MangaModel{
     this.price = 0.0;
 
     final data  = await   http.get(Uri.parse('https://api.mangadex.org/manga?title=$MangaName')); 
-    
+ 
     var generalData =jsonCleaner(data.body,MangaName);
 
     var imgUrl = await fetchCoverUrl(generalData["id"], 6);
