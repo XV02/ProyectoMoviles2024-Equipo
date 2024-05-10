@@ -20,7 +20,7 @@ class FavoritesHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Favorites',
+            'Your Best Selection',
             style: TextStyle(
               color: Colors.red,
               fontSize: 38,

@@ -31,7 +31,7 @@ class _manga_item extends State<MangaItem> {
         ModalRoute.of(context)!.settings.arguments as MangaItemArguments;
     MangaModel toAdd = MangaModel();
 
-    data = await toAdd.getDataById(args.id);
+    data = await toAdd.getDataById(args.id, '3');
     setState(() {});
   }
 

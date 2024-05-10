@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyecto_final/auth/bloc/bloc/auth_bloc.dart';
+import 'package:proyecto_final/bloc/favorites_page/favorites_page_bloc.dart';
+import 'package:proyecto_final/bloc/shopping_cart/shopping_cart_bloc.dart';
 import 'package:proyecto_final/code_scanner/code_scanner.dart';
-import 'package:proyecto_final/pages/details_page/details_page.dart';
+import 'package:proyecto_final/pages/favorites_page/favorites_page.dart';
 import 'package:proyecto_final/pages/individual_item/manga.dart';
 import 'package:proyecto_final/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:proyecto_final/pages/landing_page/landing_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:proyecto_final/firebase_options.dart';
 import 'package:proyecto_final/pages/login_page/login_page.dart';
-import 'package:proyecto_final/providers/manga_prov_class.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:proyecto_final/shared/widgets/loading_page.dart';
+import 'firebase_options.dart';
 
-import 'package:provider/provider.dart';
-import 'package:proyecto_final/shared/widgets/manga_item.dart';
-
-import 'package:proyecto_final/pages/favorites_page/favorites_page.dart';
-
-final List<String> items = [
-  "801513ba-a712-498c-8f57-cae55b38cc92",
-  "52ede55c-1584-4019-b85b-3902a423c3ab",
-  "a1c7c817-4e59-43b7-9365-09675a149a6f"
-];
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -29,6 +20,8 @@ void main() async {
   );
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => AuthBloc()..add(VerifyAuthEvent())),
+    BlocProvider(create: (context) => FavoritesPageBloc()),
+    BlocProvider(create: (context) => ShoppingCartBloc())
   ], child: const MyApp()));
 }
 
@@ -55,21 +48,25 @@ class MyApp extends StatelessWidget {
                 },
                 listener: (context, state) {
                   if (state is AuthErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          "There was an error",
-                          style: TextStyle(color: Colors.white),
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "There was an error",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.black,
                         ),
-                        backgroundColor: Colors.black,
-                      ),
-                    );
+                      );
                   }
                 },
               ),
           '/shopping-cart': (context) => BlocConsumer<AuthBloc, AuthState>(
                 builder: (context, state) {
                   if (state is AuthSuccessState) {
+                    BlocProvider.of<ShoppingCartBloc>(context)
+                        .add(LoadShoppingCart());
                     return const ShoppingCartPage();
                   } else if (state is UnAuthState ||
                       state is AuthErrorState ||
@@ -80,15 +77,17 @@ class MyApp extends StatelessWidget {
                 },
                 listener: (context, state) {
                   if (state is AuthErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          "There was an error",
-                          style: TextStyle(color: Colors.white),
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "There was an error",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.black,
                         ),
-                        backgroundColor: Colors.black,
-                      ),
-                    );
+                      );
                   }
                 },
               ),
@@ -105,22 +104,26 @@ class MyApp extends StatelessWidget {
                 },
                 listener: (context, state) {
                   if (state is AuthErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          "There was an error",
-                          style: TextStyle(color: Colors.white),
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "There was an error",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.black,
                         ),
-                        backgroundColor: Colors.black,
-                      ),
-                    );
+                      );
                   }
                 },
               ),
-          '/MangaItem': (context) => BlocConsumer<AuthBloc, AuthState>(
+          '/favorites-page': (context) => BlocConsumer<AuthBloc, AuthState>(
                 builder: (context, state) {
                   if (state is AuthSuccessState) {
-                    return const MangaItem();
+                    BlocProvider.of<FavoritesPageBloc>(context)
+                        .add(LoadFavorites());
+                    return const FavoritesPage();
                   } else if (state is UnAuthState ||
                       state is AuthErrorState ||
                       state is SignOutSuccessState) {
@@ -130,22 +133,24 @@ class MyApp extends StatelessWidget {
                 },
                 listener: (context, state) {
                   if (state is AuthErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          "There was an error",
-                          style: TextStyle(color: Colors.white),
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "There was an error",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.black,
                         ),
-                        backgroundColor: Colors.black,
-                      ),
-                    );
+                      );
                   }
                 },
               ),
-          '/favorites-page': (context) => BlocConsumer<AuthBloc, AuthState>(
+          '/MangaItem': (context) => BlocConsumer<AuthBloc, AuthState>(
                 builder: (context, state) {
                   if (state is AuthSuccessState) {
-                    return const FavoritesPage();
+                    return const MangaItem();
                   } else if (state is UnAuthState ||
                       state is AuthErrorState ||
                       state is SignOutSuccessState) {
