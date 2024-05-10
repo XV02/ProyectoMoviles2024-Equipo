@@ -8,13 +8,10 @@ String urlDef =
 Future<List<MangaModel>?> getPostData(List<String> MangaName) async {
   List<MangaModel> _post = [];
   for (var i = 0; i < MangaName.length; i++) {
-    print("Fetching From provider ${MangaName[i]}");
     MangaModel toAdd = MangaModel();
     dynamic curr = await toAdd.getDataById(MangaName[i], '6');
     _post.add(curr);
   }
-  print("List For List View Future");
-  print(_post[0].getTitle());
 
   return _post;
 }

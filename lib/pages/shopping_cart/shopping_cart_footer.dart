@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ShoppingCartFooter extends StatelessWidget {
+  final double total;
+
   const ShoppingCartFooter({
     super.key,
+    required this.total,
   });
 
   @override
@@ -29,7 +32,7 @@ class ShoppingCartFooter extends StatelessWidget {
                 ),
               ),
               child: Text(
-                "Total: \$300",
+                "Total: \$${total.toStringAsFixed(2)}",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,
