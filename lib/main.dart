@@ -46,15 +46,17 @@ class MyApp extends StatelessWidget {
               },
               listener: (context, state) {
                 if (state is AuthErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        "There was an error",
-                        style: TextStyle(color: Colors.white),
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "There was an error",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.black,
                       ),
-                      backgroundColor: Colors.black,
-                    ),
-                  );
+                    );
                 }
               },
             ),
@@ -73,15 +75,17 @@ class MyApp extends StatelessWidget {
               },
               listener: (context, state) {
                 if (state is AuthErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        "There was an error",
-                        style: TextStyle(color: Colors.white),
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "There was an error",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.black,
                       ),
-                      backgroundColor: Colors.black,
-                    ),
-                  );
+                    );
                 }
               },
             ),
@@ -100,15 +104,17 @@ class MyApp extends StatelessWidget {
               },
               listener: (context, state) {
                 if (state is AuthErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        "There was an error",
-                        style: TextStyle(color: Colors.white),
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "There was an error",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.black,
                       ),
-                      backgroundColor: Colors.black,
-                    ),
-                  );
+                    );
                 }
               },
             ),

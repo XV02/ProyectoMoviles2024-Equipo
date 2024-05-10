@@ -51,39 +51,45 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
       return const LoadingPage();
     }, listener: (context, state) {
       if (state is ShoppingCartError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "There was an error",
-              style: TextStyle(color: Colors.white),
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text(
+                "There was an error",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.black,
             ),
-            backgroundColor: Colors.black,
-          ),
-        );
+          );
       }
       if (state is ShoppingCartRemoved) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "Removed from shopping cart",
-              style: TextStyle(color: Colors.white),
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Removed from shopping cart",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.black,
             ),
-            backgroundColor: Colors.black,
-          ),
-        );
+          );
         // Refresh the page
         context.read<ShoppingCartBloc>().add(LoadShoppingCart());
       }
       if (state is ShoppingCartAdded) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "Added to shopping cart",
-              style: TextStyle(color: Colors.white),
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Added to shopping cart",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.black,
             ),
-            backgroundColor: Colors.black,
-          ),
-        );
+          );
         // Refresh the page
         context.read<ShoppingCartBloc>().add(LoadShoppingCart());
       }

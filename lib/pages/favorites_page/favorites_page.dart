@@ -32,26 +32,30 @@ class _FavoritesPageState extends State<FavoritesPage> {
       return const LoadingPage();
     }, listener: (context, state) {
       if (state is FavoritesError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "There was an error",
-              style: TextStyle(color: Colors.white),
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text(
+                "There was an error",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.black,
             ),
-            backgroundColor: Colors.black,
-          ),
-        );
+          );
       }
       if (state is FavoriteRemoved) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "Removed from favorites",
-              style: TextStyle(color: Colors.white),
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Removed from favorites",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.black,
             ),
-            backgroundColor: Colors.black,
-          ),
-        );
+          );
         // Refresh the page
         context.read<FavoritesPageBloc>().add(LoadFavorites());
       }
