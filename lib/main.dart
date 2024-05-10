@@ -61,6 +61,8 @@ class MyApp extends StatelessWidget {
         '/shopping-cart': (context) => BlocConsumer<AuthBloc, AuthState>(
               builder: (context, state) {
                 if (state is AuthSuccessState) {
+                  BlocProvider.of<ShoppingCartBloc>(context)
+                      .add(LoadShoppingCart());
                   return const ShoppingCartPage();
                 } else if (state is UnAuthState ||
                     state is AuthErrorState ||

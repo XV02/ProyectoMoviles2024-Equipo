@@ -36,8 +36,6 @@ class MangaModel {
   getDataById(String Id, String volume) async {
     this.author = "testFromGet";
     this.price = 0.0;
-    print("Getting By id");
-    print(Id);
 
     final data =
         await http.get(Uri.parse('https://api.mangadex.org/manga?ids[]=$Id'));
@@ -79,7 +77,6 @@ class MangaModel {
     String base =
         "https://api.mangadex.org/cover?limit=100&manga[]=$mangaId&order[volume]=asc";
     String? imgId;
-    print(base);
     final res = await http.get(Uri.parse(base));
     //
     var data = json.decode(res.body);
@@ -105,10 +102,8 @@ class MangaModel {
   jsonCleaner(res, MangaName) {
     // String toFind = 'One Piece';
     var data = json.decode(res);
-    // print(data["data"]);
     for (dynamic value in data["data"]) {
       if (value["attributes"]["title"]["en"] == MangaName) {
-        print(value);
         return {
           "id": value["id"],
           "title": value["attributes"]["title"]["en"],
@@ -116,7 +111,6 @@ class MangaModel {
         };
       }
     }
-    print(data["data"][0]);
     return {
       "id": data["data"][0]["id"],
       "title": data["data"][0]["attributes"]["title"]["en"],

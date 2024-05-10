@@ -25,7 +25,6 @@ class FavoritesPageBloc extends Bloc<FavoritesPageEvent, FavoritesPageState> {
       // Create a list of favorites where you use a for loop to iterate over the list of favorites and get the data of each favorite
       List favoritesList = [];
       for (var favorite in favorites) {
-        print(favorite);
         MangaModel favoriteData = await MangaModel()
             .getDataById(favorite['mangaId'], favorite['volume']);
         favoritesList.add({
@@ -39,7 +38,6 @@ class FavoritesPageBloc extends Bloc<FavoritesPageEvent, FavoritesPageState> {
       }
       emit(FavoritesLoaded(favoritesList));
     } catch (e) {
-      print(e.toString());
       emit(FavoritesError());
     }
   }
@@ -62,7 +60,6 @@ class FavoritesPageBloc extends Bloc<FavoritesPageEvent, FavoritesPageState> {
       // Create a list of favorites where you use a for loop to iterate over the list of favorites and get the data of each favorite
       List favoritesList = [];
       for (var favorite in favorites) {
-        print(favorite);
         MangaModel favoriteData = await MangaModel()
             .getDataById(favorite['mangaId'], favorite['volume']);
         favoritesList.add({
@@ -74,7 +71,6 @@ class FavoritesPageBloc extends Bloc<FavoritesPageEvent, FavoritesPageState> {
           'volume': favorite['volume'],
         });
       }
-      print(favoritesList);
       emit(FavoriteRemoved(favoritesList));
     } catch (e) {
       emit(FavoritesError());

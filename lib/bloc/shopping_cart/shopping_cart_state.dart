@@ -15,7 +15,11 @@ class ShoppingCartLoaded extends ShoppingCartState {
   ShoppingCartLoaded(this.shoppingCart);
 }
 
-class ShoppingCartAdded extends ShoppingCartState {}
+class ShoppingCartAdded extends ShoppingCartState {
+  final List shoppingCart;
+
+  ShoppingCartAdded(this.shoppingCart);
+}
 
 class ShoppingCartRemoved extends ShoppingCartState {
   final List shoppingCart;

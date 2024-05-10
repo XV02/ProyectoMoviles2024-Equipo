@@ -10,13 +10,20 @@ sealed class ShoppingCartEvent extends Equatable {
 class LoadShoppingCart extends ShoppingCartEvent {}
 
 class AddToShoppingCart extends ShoppingCartEvent {
-  final int manga_id;
+  final String manga_id;
+  final String volume;
 
-  AddToShoppingCart(this.manga_id);
+  AddToShoppingCart(this.manga_id, this.volume);
 }
 
 class RemoveFromShoppingCart extends ShoppingCartEvent {
-  final String favorite_id;
+  final String shoppingCart_id;
 
-  RemoveFromShoppingCart(this.favorite_id);
+  RemoveFromShoppingCart(this.shoppingCart_id);
+}
+
+class RemoveAllFromShoppingCart extends ShoppingCartEvent {
+  final String shoppingCart_id;
+
+  RemoveAllFromShoppingCart(this.shoppingCart_id);
 }
