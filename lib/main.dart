@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyecto_final/auth/bloc/bloc/auth_bloc.dart';
 import 'package:proyecto_final/bloc/favorites_page/favorites_page_bloc.dart';
+import 'package:proyecto_final/bloc/landing_page/landing_page_bloc.dart';
 import 'package:proyecto_final/bloc/shopping_cart/shopping_cart_bloc.dart';
 import 'package:proyecto_final/code_scanner/code_scanner.dart';
+import 'package:proyecto_final/pages/details_page/details_page.dart';
 import 'package:proyecto_final/pages/favorites_page/favorites_page.dart';
 import 'package:proyecto_final/pages/individual_item/manga.dart';
 import 'package:proyecto_final/pages/shopping_cart/shopping_cart_page.dart';
@@ -21,7 +23,8 @@ void main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => AuthBloc()..add(VerifyAuthEvent())),
     BlocProvider(create: (context) => FavoritesPageBloc()),
-    BlocProvider(create: (context) => ShoppingCartBloc())
+    BlocProvider(create: (context) => ShoppingCartBloc()),
+    BlocProvider(create: (context) => LandingPageBloc()),
   ], child: const MyApp()));
 }
 
@@ -169,6 +172,33 @@ class MyApp extends StatelessWidget {
                         backgroundColor: Colors.black,
                       ),
                     );
+                  }
+                },
+              ),
+          '/details': (context) => BlocConsumer<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthSuccessState) {
+                    return const DetailsPage();
+                  } else if (state is UnAuthState ||
+                      state is AuthErrorState ||
+                      state is SignOutSuccessState) {
+                    return const LoginPage();
+                  }
+                  return const LoadingPage();
+                },
+                listener: (context, state) {
+                  if (state is AuthErrorState) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "There was an error",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.black,
+                        ),
+                      );
                   }
                 },
               ),

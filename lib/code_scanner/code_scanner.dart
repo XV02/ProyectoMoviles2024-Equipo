@@ -94,7 +94,6 @@ class _QRState extends State<QR> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -113,7 +112,6 @@ class _QRState extends State<QR> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-      print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -150,11 +148,10 @@ class _QRState extends State<QR> {
 
                     await scanQR();
                     // MangaModel curr = await toAdd.getDataById(_scanBarcode);
-                    print(_scanBarcode);
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushNamedAndRemoveUntil(context, "/MangaItem",
                           (Route<dynamic> route) => false,
-                          arguments: MangaItemArguments(_scanBarcode));
+                          arguments: MangaItemArguments(id: _scanBarcode));
                     });
                   },
                   child: Text('Start QR scan')),

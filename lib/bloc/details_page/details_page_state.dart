@@ -8,3 +8,11 @@ sealed class DetailsPageState extends Equatable {
 }
 
 final class DetailsPageInitial extends DetailsPageState {}
+
+class LoadDetailsPageLoaded extends DetailsPageEvent {
+  final List manga;
+
+  LoadDetailsPageLoaded(this.manga);
+}
+
+class LoadDetailsPageError extends DetailsPageEvent {}

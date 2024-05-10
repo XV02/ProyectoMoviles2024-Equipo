@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto_final/bloc/landing_page/landing_page_bloc.dart';
 
-class SearcherContainer extends StatelessWidget {
+class SearcherContainer extends StatefulWidget {
   const SearcherContainer({
     super.key,
   });
+
+  @override
+  State<SearcherContainer> createState() => _SearcherContainerState();
+}
+
+class _SearcherContainerState extends State<SearcherContainer> {
+  TextEditingController searchText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +57,7 @@ class SearcherContainer extends StatelessWidget {
                 padding: // PAdding of 20 in top and bottom
                     const EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
+                  controller: searchText,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -56,9 +66,16 @@ class SearcherContainer extends StatelessWidget {
                       ),
                     ),
                     hintText: 'Search a title',
-                    suffixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.red,
+                    suffixIcon: IconButton(
+                      icon: const Icon(
+                        Icons.search,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {
+                        // Search the title
+                        BlocProvider.of<LandingPageBloc>(context)
+                            .add(SearchLandingPage(searchText.text));
+                      },
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),

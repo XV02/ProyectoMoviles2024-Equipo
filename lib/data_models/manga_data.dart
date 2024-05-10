@@ -8,6 +8,7 @@ class MangaModel {
   double? price;
   String? desc;
   String? author;
+  String? mangaId;
 
   String? getTitle() {
     return title;
@@ -21,7 +22,17 @@ class MangaModel {
     return desc;
   }
 
-  MangaModel({this.author, this.title, this.cover_url, this.price, this.desc});
+  String? getId() {
+    return mangaId;
+  }
+
+  MangaModel(
+      {this.author,
+      this.title,
+      this.cover_url,
+      this.price,
+      this.desc,
+      this.mangaId});
 
   factory MangaModel.fromJson(Map<String, dynamic> Json) {
     return MangaModel(
@@ -31,6 +42,7 @@ class MangaModel {
       price: Json['price'] ?? 0.0,
       desc: Json['desc'] ?? "Placeholder",
       author: Json['Author'] ?? "Placeholder",
+      mangaId: Json['id'] ?? "Placeholder",
     );
   }
   getDataById(String Id, String volume) async {
@@ -69,7 +81,8 @@ class MangaModel {
     return MangaModel.fromJson({
       'title': MangaName,
       'cover_url': imgUrl,
-      'desc': generalData["description"]
+      'desc': generalData["description"],
+      'id': generalData["id"]
     });
   }
 

@@ -9,8 +9,9 @@ import 'package:proyecto_final/pages/individual_item/manga_item_appbar.dart';
 
 class MangaItemArguments {
   final String id;
+  final String? volume;
 
-  MangaItemArguments(this.id);
+  MangaItemArguments({required this.id, this.volume = '3'});
 }
 
 class MangaItem extends StatefulWidget {
@@ -23,6 +24,7 @@ class MangaItem extends StatefulWidget {
 class _manga_item extends State<MangaItem> {
   var data = null;
   String id = '';
+  String volume = '3';
   @override
   void initState() {
     super.initState();
@@ -36,8 +38,12 @@ class _manga_item extends State<MangaItem> {
     MangaModel toAdd = MangaModel();
 
     this.id = args.id;
+    this.volume = args.volume!;
 
-    data = await toAdd.getDataById(args.id, '3');
+    print(args.id);
+    print(args.volume!);
+
+    data = await toAdd.getDataById(args.id, args.volume!);
     setState(() {});
   }
 
@@ -82,7 +88,7 @@ class _manga_item extends State<MangaItem> {
                     ),
                     Center(
                       child: Text(
-                        '#3',
+                        '#${volume}',
                         style: TextStyle(
                             decorationColor: Colors.white, fontSize: 35),
                       ),
@@ -96,7 +102,7 @@ class _manga_item extends State<MangaItem> {
                             print(id);
                             // Add to cart
                             BlocProvider.of<ShoppingCartBloc>(context)
-                                .add(AddToShoppingCart(id, '3'));
+                                .add(AddToShoppingCart(id, ''));
                             ScaffoldMessenger.of(context)
                               ..hideCurrentSnackBar()
                               ..showSnackBar(

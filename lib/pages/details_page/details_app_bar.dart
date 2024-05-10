@@ -9,7 +9,10 @@ class DetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          // Push named to base route
+          Navigator.pushNamed(context, '/');
+        },
         icon: Icon(Icons.arrow_back_ios_outlined),
       ),
       actions: [

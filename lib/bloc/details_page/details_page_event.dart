@@ -6,3 +6,9 @@ sealed class DetailsPageEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class LoadDetailsPage extends DetailsPageEvent {
+  final String mangaId;
+
+  LoadDetailsPage(this.mangaId);
+}
