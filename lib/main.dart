@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyecto_final/auth/bloc/bloc/auth_bloc.dart';
 import 'package:proyecto_final/bloc/favorites_page/favorites_page_bloc.dart';
+import 'package:proyecto_final/bloc/shopping_cart/shopping_cart_bloc.dart';
 import 'package:proyecto_final/pages/favorites_page/favorites_page.dart';
 import 'package:proyecto_final/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:proyecto_final/pages/landing_page/landing_page.dart';
@@ -17,7 +18,8 @@ void main() async {
   );
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => AuthBloc()..add(VerifyAuthEvent())),
-    BlocProvider(create: (context) => FavoritesPageBloc())
+    BlocProvider(create: (context) => FavoritesPageBloc()),
+    BlocProvider(create: (context) => ShoppingCartBloc())
   ], child: const MyApp()));
 }
 
