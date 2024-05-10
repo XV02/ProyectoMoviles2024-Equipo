@@ -16,7 +16,7 @@ class AddFavorites extends FavoritesPageEvent {
 }
 
 class RemoveFavorites extends FavoritesPageEvent {
-  final int manga_id;
+  final String favorite_id;
 
-  RemoveFavorites(this.manga_id);
+  RemoveFavorites(this.favorite_id);
 }

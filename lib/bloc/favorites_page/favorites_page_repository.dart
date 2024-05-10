@@ -25,15 +25,22 @@ class FavoritesRepository {
     );
   }
 
-  Future<void> removeFavorite(String userId, String productId) async {
-    await favoritesCollection.doc(userId).update(
-      {
-        'items': FieldValue.arrayRemove([productId]),
-      },
-    );
+  Future<void> removeFavorite(String userId, String docId) async {
+    await favoritesCollection.doc(docId).delete();
   }
 
-  Future<void> getFavorites(String userId, String productId) async {
-    await favoritesCollection.doc(userId).get();
+  Future<List> getFavorites(String userId) async {
+    QuerySnapshot favorites =
+        await favoritesCollection.where("userId", isEqualTo: userId).get();
+    final favoritesList = favorites.docs
+        .map((e) => {
+              'id': e.id,
+              'mangaId': e['mangaId'],
+              'volume': e['volume'],
+              'date': e['date'],
+              'userId': e['userId'],
+            })
+        .toList();
+    return favoritesList;
   }
 }

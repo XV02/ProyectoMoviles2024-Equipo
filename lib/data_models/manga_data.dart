@@ -33,7 +33,7 @@ class MangaModel {
       author: Json['Author'] ?? "Placeholder",
     );
   }
-  getDataById(String Id) async {
+  getDataById(String Id, String volume) async {
     this.author = "testFromGet";
     this.price = 0.0;
     print("Getting By id");
@@ -44,7 +44,7 @@ class MangaModel {
 
     var generalData = jsonCleaner_id(data.body);
 
-    var imgUrl = await fetchCoverUrl(generalData["id"], 6);
+    var imgUrl = await fetchCoverUrl(generalData["id"], volume);
 
     // this.title =generalData["title"];
     return MangaModel.fromJson({

@@ -1,33 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto_final/bloc/favorites_page/favorites_page_bloc.dart';
 
 class FavoritesList extends StatelessWidget {
-  final List<String> mangas;
-  final List<String> author;
-  final List<int> volumes;
+  final List favorites;
 
-  const FavoritesList(
-      {super.key,
-      this.mangas = const [
-        'One Piece',
-        'Berserk',
-        'ChainsawMan',
-        'Dragon Ball',
-        'Bleach',
-      ],
-      this.author = const [
-        'Eiichiro Oda',
-        'Kentaro Miura',
-        'Tatsuki Fujimoto',
-        'Akira Toriyama',
-        'Tite Kubo',
-      ],
-      this.volumes = const [
-        108,
-        41,
-        16,
-        42,
-        74,
-      ]});
+  const FavoritesList({super.key, required this.favorites});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +13,7 @@ class FavoritesList extends StatelessWidget {
       height: MediaQuery.of(context).size.height * .45,
       width: double.infinity,
       child: ListView.builder(
-        itemCount: mangas.length,
+        itemCount: favorites.length,
         itemBuilder: (BuildContext context, int index) {
           Color bgColor =
               index % 2 != 0 ? Colors.red : Color.fromARGB(255, 243, 52, 38);
@@ -44,23 +22,22 @@ class FavoritesList extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(color: bgColor),
             child: ListTile(
-              leading: Icon(
-                Icons.image,
-                color: Colors.white,
-                size: 64,
-              ),
+              leading: favorites[index]['image'] != null
+                  ? Image.network(
+                      favorites[index]['image'],
+                      height: 64,
+                      width: 64,
+                    )
+                  : Icon(
+                      Icons.image,
+                      color: Colors.white,
+                      size: 64,
+                    ),
               title: Text(
-                '${mangas[index]}',
+                '${favorites[index]['title']}',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
-                ),
-              ),
-              subtitle: Text(
-                '${author[index]}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
                 ),
               ),
               trailing: Container(
@@ -70,15 +47,21 @@ class FavoritesList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '# ${volumes[index]}',
+                      '${favorites[index]['volume']}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
-                    Icon(
-                      Icons.favorite,
+                    IconButton(
+                      icon: Icon(Icons.delete),
                       color: Colors.white,
+                      onPressed: () {
+                        // Remove from favorites with the event
+                        BlocProvider.of<FavoritesPageBloc>(context).add(
+                          RemoveFavorites(favorites[index]['id']),
+                        );
+                      },
                     ),
                   ],
                 ),
