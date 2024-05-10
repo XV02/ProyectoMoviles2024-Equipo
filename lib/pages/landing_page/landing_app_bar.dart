@@ -11,10 +11,23 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
-        PopupMenuButton(itemBuilder: (BuildContext context) {
-          return _buildPopupMenuItems(context);
-        })
+        IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/shopping-cart');
+          },
+          icon: const Icon(Icons.shopping_cart),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/favorites-page');
+          },
+          icon: const Icon(Icons.favorite),
+        ),
+        PopupMenuButton(
+          itemBuilder: (BuildContext context) {
+            return _buildPopupMenuItems(context);
+          },
+        ),
       ],
     );
   }
@@ -28,7 +41,7 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       const PopupMenuItem(
         value: 1,
-        child: Text('Settings'),
+        child: Text('Favorites'),
       ),
       PopupMenuItem(
         value: 2,

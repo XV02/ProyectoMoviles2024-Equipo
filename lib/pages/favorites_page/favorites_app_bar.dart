@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ShoppingCartAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const ShoppingCartAppBar({
+class FavoritesAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const FavoritesAppBar({
     super.key,
   });
 
