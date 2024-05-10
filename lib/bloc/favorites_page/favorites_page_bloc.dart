@@ -44,8 +44,14 @@ class FavoritesPageBloc extends Bloc<FavoritesPageEvent, FavoritesPageState> {
 
   FutureOr<void> _addFavorites(event, emit) async {
     try {
-      final User user = FirebaseAuth.instance.currentUser!;
-      await _favoritesRepo.addFavorite(user.uid, event.manga_id);
+      final String userId = FirebaseAuth.instance.currentUser!.uid;
+      bool added = await _favoritesRepo.addFavorite(
+          userId, event.manga_id, event.volume);
+      if (added) {
+        emit(FavoriteAddedSign());
+      } else {
+        emit(FavoriteUnAddedSign());
+      }
     } catch (e) {
       emit(FavoritesError());
     }

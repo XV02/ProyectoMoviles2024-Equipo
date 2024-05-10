@@ -17,12 +17,23 @@ class FavoritesRepository {
     }
   }
 
-  Future<void> addFavorite(String userId, String productId) async {
-    await favoritesCollection.doc(userId).update(
-      {
-        'items': FieldValue.arrayUnion([productId]),
-      },
-    );
+  Future<bool> addFavorite(String userId, String mangaId, String volume) async {
+    // Check if the favorite already exists
+    final docSnapshot = await favoritesCollection.doc(userId).get();
+    if (docSnapshot.exists) {
+      // If exists, delete the document
+      await favoritesCollection.doc(userId).delete();
+      return false;
+    } else {
+      // If it doesn't exist, add the favorite
+      await favoritesCollection.doc(userId).set({
+        'mangaId': mangaId,
+        'volume': volume,
+        'date': DateTime.now(),
+        'userId': userId,
+      });
+      return true;
+    }
   }
 
   Future<void> removeFavorite(String userId, String docId) async {

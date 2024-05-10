@@ -10,9 +10,10 @@ sealed class FavoritesPageEvent extends Equatable {
 class LoadFavorites extends FavoritesPageEvent {}
 
 class AddFavorites extends FavoritesPageEvent {
-  final int manga_id;
+  final String manga_id;
+  final String volume;
 
-  AddFavorites(this.manga_id);
+  AddFavorites(this.manga_id, this.volume);
 }
 
 class RemoveFavorites extends FavoritesPageEvent {

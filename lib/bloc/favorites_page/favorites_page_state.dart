@@ -24,3 +24,7 @@ class FavoriteRemoved extends FavoritesPageState {
 }
 
 class FavoritesError extends FavoritesPageState {}
+
+class FavoriteAddedSign extends FavoritesPageState {}
+
+class FavoriteUnAddedSign extends FavoritesPageState {}
